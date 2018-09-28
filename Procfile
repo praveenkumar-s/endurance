@@ -1,1 +1,1 @@
-web: python app.py --noauth_local_webserver
+web: gunicorn --bind 0.0.0.0:80 wsgi
