@@ -16,7 +16,7 @@ def require_appkey(view_function):
     def decorated_function(*args, **kwargs):
         key=API_KEY
         #if request.args.get('key') and request.args.get('key') == key:
-        if request.headers.get('x-api-key') and request.headers.get('x-api-key') == key:
+        if request.headers.get('x-api-key') == key or request.headers.get('X-Hub-Signature') == key:
             return view_function(*args, **kwargs)
         else:
             abort(401)
