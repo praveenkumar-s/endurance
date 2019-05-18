@@ -1,6 +1,7 @@
 import pyrebase
 import sys
 import os
+import traceback
 
 class firebase_client:
     def __init__(self):        
@@ -24,4 +25,5 @@ class firebase_client:
             return db.child(tag).get().val()
         except:
             print("Exception Occured")
+            traceback.print_exc()
             return None
