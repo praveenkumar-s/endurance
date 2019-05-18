@@ -23,4 +23,5 @@ class firebase_client:
         try:
             return db.child(tag).get().val()
         except:
+            print("Exception Occured")
             return None
