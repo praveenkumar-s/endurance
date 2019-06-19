@@ -2,14 +2,17 @@ import pyrebase
 import sys
 import os
 import traceback
+import json
 
 class firebase_client:
-    def __init__(self):        
+    def __init__(self): 
+        json.dump(open("service_acct.json","w+"),json.loads(os.environ['JSON_DATA']))
         config = {
     'apiKey': os.environ['FIREBASE_API_KEY'],
     'authDomain': os.environ['FIREBASE_AUTH_DOMAIN'],
     'databaseURL': os.environ['FIREBASE_DATABASE_URL'],
-    'storageBucket': ''
+    'storageBucket': '',
+    'serviceAccount':'service_acct.json'
 }
         self.firebase = pyrebase.initialize_app(config)
         self.firebase.auth()
