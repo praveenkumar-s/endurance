@@ -6,7 +6,9 @@ import json
 
 class firebase_client:
     def __init__(self): 
-        json.dump(open("service_acct.json","w+"),json.loads(os.environ['JSON_DATA']))
+        with open("service_acct.json", "w+") as write_file:
+            json.dump(json.loads(os.environ['JSON_DATA']), write_file)
+
         config = {
     'apiKey': os.environ['FIREBASE_API_KEY'],
     'authDomain': os.environ['FIREBASE_AUTH_DOMAIN'],
