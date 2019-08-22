@@ -5,7 +5,7 @@ import requests
 
 SCM_blueprint = Blueprint('SCM', __name__)
 
-@SCM_blueprint.route("<data_source>/exclude/<job_name>", methods =['GET'])
+@SCM_blueprint.route("/<data_source>/exclude/<job_name>", methods =['GET'])
 def exclude(data_source,job_name):
     args = request.args()
     if(not args['token']==os.environ.get('SCM_token')):
