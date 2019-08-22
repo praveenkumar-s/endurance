@@ -6,9 +6,12 @@ from flask_restplus import Resource, Api
 import firebaseClient as FBC
 from functools import wraps
 import os
+from SCM import SCM_blueprint
+
 
 app = Flask(__name__)
 api = Api(app)
+app.register_blueprint(SCM_blueprint)
 firebaseInstance=FBC.firebase_client()
 API_KEY=os.environ.get('API_KEY')
 
