@@ -9,16 +9,16 @@ SCM_blueprint = Blueprint('SCM', __name__)
 
 @SCM_blueprint.route("/<data_source>/exclude/<job_name>", methods =['GET'])
 def exclude(data_source,job_name):
-    token = request.args.get('token')
-    if(not token==os.environ.get('SCM_token')):
-        return "unauthorized =",403
-    
-    existing_data = firebaseInstance.getdata(data_source)   
-    existing_data['exclusion']['job_names'].append(job_name)
-    resp = requests.post("http://ndurance.herokuapp.com/api/data_store/{0}".format(data_source),headers = {'x-api-key': os.environ.get('API_KEY')}, json = existing_data )
-    if(resp.status_code==200):
+    try:
+        token = request.args.get('token')
+        if(not token==os.environ.get('SCM_token')):
+            return "unauthorized =",403
+        
+        existing_data = firebaseInstance.getdata(data_source)   
+        existing_data['exclusion']['job_names'].append(job_name)
+        firebaseInstance.putvalue(child=data_source,data=existing_data)
         return "OK",200
-    else:
+    except:
         return "Unable to Complete transaction",500
 
     
