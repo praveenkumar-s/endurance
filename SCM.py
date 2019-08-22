@@ -17,7 +17,7 @@ def exclude(data_source,job_name):
     if(resp.status_code ==200):
         existing_data = resp.json()
         existing_data['exclusion']['job_names'].append(job_name)
-    resp = requests.post("http://localhost/api/data_store/{0}".format(data_source),headers = {'x-api-key': os.environ.get('API_KEY')}, json = existing_data )
+    resp = requests.post("http://ndurance.herokuapp.com/api/data_store/{0}".format(data_source),headers = {'x-api-key': os.environ.get('API_KEY')}, json = existing_data )
     if(resp.status_code==200):
         return "OK",200
     else:
