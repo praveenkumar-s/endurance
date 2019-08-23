@@ -29,7 +29,7 @@ def require_appkey(view_function):
 
 
 @api.route('/api/data_store/<string:data_source>')
-
+@crossdomain(origin='*')
 class readDatafromFB(Resource):
 
     @require_appkey
