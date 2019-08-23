@@ -7,9 +7,10 @@ import firebaseClient as FBC
 from functools import wraps
 import os
 from SCM import SCM_blueprint
-
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 app.register_blueprint(SCM_blueprint)
 firebaseInstance=FBC.firebase_client()
@@ -29,7 +30,7 @@ def require_appkey(view_function):
 
 
 @api.route('/api/data_store/<string:data_source>')
-@crossdomain(origin='*')
+
 class readDatafromFB(Resource):
 
     @require_appkey
